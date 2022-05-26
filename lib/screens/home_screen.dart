@@ -10,13 +10,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  DateTime? selectedDay;
+  DateTime focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Calendar(),
+            Calendar(
+              onDaySelected: onDaySelected,
+              focusedDay: focusedDay,
+              selectedDay: selectedDay,
+            ),
             SizedBox(
               height: 8.0,
             ),
@@ -28,5 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    setState(() {
+      this.selectedDay = selectedDay;
+      this.focusedDay = selectedDay;
+      // 우리가 2/2을 누르면 selectedDay,focusedDay 둘 다 2/2가 됨
+      // 근데 우리는 이미 2월을 보고있기 떄문에 캘린더의 변경이 없는거야
+      // 근데 우리가 1/31을 누르는 순간 focusedDay가 1/31로 바뀌면서 1월을 바라보게 되는거야
+    });
   }
 }
