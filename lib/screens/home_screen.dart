@@ -1,3 +1,4 @@
+import 'package:calendar_schedular/components/calendar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +12,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('HomeScreen'),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Calendar(),
+          ],
+        ),
       ),
     );
   }
