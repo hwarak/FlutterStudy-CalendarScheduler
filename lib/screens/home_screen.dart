@@ -38,13 +38,26 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 8.0,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ScheduleCard(
-                startTime: 8,
-                endTime: 9,
-                content: '프로그래밍 공부하기',
-                color: Colors.red,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListView.separated(
+                  itemCount: 100, // 리스트에 몇개를 보여줄건지
+                  separatorBuilder: (context, index) {
+                    // itemBuilder가 한번 실행이 될 때마다 그 다음에 실행된다.
+                    return SizedBox(
+                      height: 8.0,
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return ScheduleCard(
+                      startTime: 8,
+                      endTime: 9,
+                      content: '프로그래밍 공부하기 ${index}',
+                      color: Colors.red,
+                    );
+                  },
+                ),
               ),
             ),
           ],
