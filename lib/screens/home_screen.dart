@@ -1,4 +1,5 @@
 import 'package:calendar_schedular/components/calendar.dart';
+import 'package:calendar_schedular/components/schedule_bottom_sheet.dart';
 import 'package:calendar_schedular/components/schedule_card.dart';
 import 'package:calendar_schedular/components/today_banner.dart';
 import 'package:calendar_schedular/constant/colors.dart';
@@ -52,12 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: PRIMARY_COLOR,
       onPressed: () {
         showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (_) {
-            return Container(
-              color: Colors.white,
-              height: 300.0,
-            );
+            return ScheduleBottom();
           },
         );
       },
