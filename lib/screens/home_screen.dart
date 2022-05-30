@@ -1,6 +1,7 @@
 import 'package:calendar_schedular/components/calendar.dart';
 import 'package:calendar_schedular/components/schedule_card.dart';
 import 'package:calendar_schedular/components/today_banner.dart';
+import 'package:calendar_schedular/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: renderFloatingActionButton(),
       body: SafeArea(
         child: Column(
           children: [
@@ -38,31 +40,28 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 8.0,
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView.separated(
-                  itemCount: 100, // 리스트에 몇개를 보여줄건지
-                  separatorBuilder: (context, index) {
-                    // itemBuilder가 한번 실행이 될 때마다 그 다음에 실행된다.
-                    return SizedBox(
-                      height: 8.0,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return ScheduleCard(
-                      startTime: 8,
-                      endTime: 9,
-                      content: '프로그래밍 공부하기 ${index}',
-                      color: Colors.red,
-                    );
-                  },
-                ),
-              ),
-            ),
+            _ScheduleList(),
           ],
         ),
       ),
+    );
+  }
+
+  FloatingActionButton renderFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: PRIMARY_COLOR,
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (_) {
+            return Container(
+              color: Colors.white,
+              height: 300.0,
+            );
+          },
+        );
+      },
+      child: Icon(Icons.add),
     );
   }
 
@@ -74,5 +73,35 @@ class _HomeScreenState extends State<HomeScreen> {
       // 근데 우리는 이미 2월을 보고있기 떄문에 캘린더의 변경이 없는거야
       // 근데 우리가 1/31을 누르는 순간 focusedDay가 1/31로 바뀌면서 1월을 바라보게 되는거야
     });
+  }
+}
+
+class _ScheduleList extends StatelessWidget {
+  const _ScheduleList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: ListView.separated(
+          itemCount: 100, // 리스트에 몇개를 보여줄건지
+          separatorBuilder: (context, index) {
+            // itemBuilder가 한번 실행이 될 때마다 그 다음에 실행된다.
+            return SizedBox(
+              height: 8.0,
+            );
+          },
+          itemBuilder: (context, index) {
+            return ScheduleCard(
+              startTime: 8,
+              endTime: 9,
+              content: '프로그래밍 공부하기 ${index}',
+              color: Colors.red,
+            );
+          },
+        ),
+      ),
+    );
   }
 }
