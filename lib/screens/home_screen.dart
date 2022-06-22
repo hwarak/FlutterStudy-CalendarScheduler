@@ -1,9 +1,10 @@
-import 'package:calendar_schedular/components/calendar.dart';
 import 'package:calendar_schedular/components/schedule_bottom_sheet.dart';
 import 'package:calendar_schedular/components/schedule_card.dart';
 import 'package:calendar_schedular/components/today_banner.dart';
 import 'package:calendar_schedular/constant/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../calendar.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
